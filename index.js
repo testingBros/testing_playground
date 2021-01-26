@@ -1,4 +1,6 @@
 const express = require("express");
+require('./db/index')
+
 const app = express();
 const port = 3000;
 
