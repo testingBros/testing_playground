@@ -33,6 +33,9 @@ describe("creating a new user", () => {
   });
 });
 
+// when  'a new user is inserted'
+  // then the db length increases by 1
+  // then the user can be found in the database
+
 // move to read in the CRUD operations (i.e. get requests)
 // formulate a new series of when then statements
-// make a git repo for testing different concepts

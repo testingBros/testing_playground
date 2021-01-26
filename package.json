@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "server": "node index.js"
   },
   "author": "",
   "license": "ISC",
@@ -12,7 +13,9 @@
     "chai": "^4.2.0"
   },
   "dependencies": {
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "faker": "^5.2.0"
+    "faker": "^5.2.0",
+    "pg": "^8.5.1"
   }
 }
