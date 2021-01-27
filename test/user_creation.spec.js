@@ -33,9 +33,22 @@ describe("creating a new user", () => {
   });
 });
 
+before(async () => {
+  const newUser = await userCreation(userAge, userHeight, userName); 
+});
+
+describe("when inserting a new user", () => {
+  it("201 status code should be received", () => {
+    // expect()
+  });
+  it("returned user value is the same as newly created user value", () => {
+    
+  });
+});
+
 // when  'a new user is inserted'
-  // then the db length increases by 1
-  // then the user can be found in the database
+  // then 201 status code should be received
+  // then returned user value is the same as newly created user value
 
 // move to read in the CRUD operations (i.e. get requests)
 // formulate a new series of when then statements
