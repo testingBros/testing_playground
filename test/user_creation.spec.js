@@ -46,7 +46,7 @@ describe("creating a new newUser", () => {
 describe("when inserting a new newUser", () => {
   
   it("201 status code should be received", () => {
-     chai.request(app)
+     chai.request(server)
      .post(`/api/?name=${userName}&height=${userHeight}&age=${userAge}`)
      .end((err, res) => {
         expect(err).to.be.null;
@@ -55,7 +55,7 @@ describe("when inserting a new newUser", () => {
   });
 
   it("preDatabaseInserted user properties equals postDatabaseInserted user properties", (done) => {
-    chai.request(app)
+    chai.request(server)
     .post(`/api/?name=${userName}&height=${userHeight}&age=${userAge}`)
     .end((err, { body: { age, height, name } }) => {
        expect(err).to.be.null;
