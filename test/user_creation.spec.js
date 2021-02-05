@@ -66,3 +66,8 @@ describe("when inserting a new newUser", () => {
       });  
   });
 });
+
+// CRUD - CREATE, READ
+// TODO
+// when a user is created with the wrong data type
+  // then error returned
