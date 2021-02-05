@@ -17,4 +17,5 @@ app.listen(port, () => {
 
 module.exports = {
   apiRouter,
+  app
 }
