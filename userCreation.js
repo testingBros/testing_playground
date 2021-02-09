@@ -1,7 +1,7 @@
 const { db } = require('./db/index');
 const userCreation = (name, age, height) => {
   if (userPropertyValidation(name, age, height) === false) {
-    return "please include name, age, height.";
+    return false;
   }
 
   return dbInsertQuery({ name, age, height });
