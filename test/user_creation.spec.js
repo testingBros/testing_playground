@@ -19,7 +19,7 @@ describe("creating a new newUser", () => {
 
   context("without arguments", () => {
     it("should log please include name, age, height", () => {
-      expect(userCreation()).to.equal("please include name, age, height.");
+      expect(userCreation()).to.equal(false);
     });
   });
 
@@ -47,7 +47,6 @@ describe("when inserting a new newUser", () => {
   
   it("201 status code should be received", () => {
      chai.request(server)
-    //  .post(`/api/?name=${userName}&height=${userHeight}&age=${userAge}`)
     .post('/api/')
      .send({
        'name': userName,
@@ -62,7 +61,6 @@ describe("when inserting a new newUser", () => {
 
   it("preDatabaseInserted user properties equals postDatabaseInserted user properties", (done) => {
     chai.request(server)
-    // .post(`/api/?name=${userName}&height=${userHeight}&age=${userAge}`)
     .post('/api/')
     .send({
       'name': userName,
@@ -77,9 +75,49 @@ describe("when inserting a new newUser", () => {
        done();
       });  
   });
+  
+  let falseNewUser, falseUserName, falseUserAge, falseUserHeight;
+  before(() => {
+    falseUserName = random.number();
+    falseUserAge = name.firstName();
+    falseUserHeight = random.number();
+    falseNewUser = userCreation(userName, userAge, userHeight);
+  });
+
+  describe("a user is created with the wrong data type", () => {
+    
+    it("400 status code should be received", (done) => {
+      chai.request(server)
+      .post('/api/')
+      .send({
+        'name': falseUserName,
+        'height': falseUserHeight,
+        'age': falseUserAge
+      })
+      .end((_, res) => {
+         expect(res).to.have.status(400);
+         done();
+        });  
+    });
+    
+    it("'You have entered the wrong data type' should be received", (done) => {
+      chai.request(server)
+      .post('/api/')
+      .send({
+        'name': falseUserName,
+        'height': falseUserHeight,
+        'age': falseUserAge
+      })
+      .end((_, res) => {
+        expect(res.error.text).to.be.equal("You have entered the wrong data type");
+        done();
+      });  
+    });
+  });
+
 });
 
 // CRUD - CREATE, READ
-// TODO
-// when a user is created with the wrong data type
-  // then error returned
+// TODO READ
+// when creating a new user
+  // then the same user should be accessible (GET)
