@@ -1,13 +1,7 @@
-const { mockPostRequest } = require("./test_api_requests.spec.js");
-
-const expect = require("chai").expect,
+const { mockPostRequest } = require("./test_api_requests.spec.js"),
+expect = require("chai").expect,
 { random, name } = require("faker"),
-{ userCreation } = require("../userCreation.js"),
-chai = require('chai'),
-chaiHttp = require('chai-http'),
-server = 'http://localhost:3000';
-
-chai.use(chaiHttp);
+{ userCreation } = require("../userCreation.js");
 
 let newUser, userName, userAge, userHeight;
 beforeEach(() => {
@@ -52,21 +46,11 @@ describe("when inserting a new newUser", () => {
     expect(statusCode).to.equal(201);
   });
 
-  it("preDatabaseInserted user properties equals postDatabaseInserted user properties", (done) => {
-    chai.request(server)
-    .post('/api/')
-    .send({
-      'name': userName,
-      'height': userHeight,
-      'age': userAge
-    })
-    .end((err, { body: { age, height, name } }) => {
-       expect(err).to.be.null;
-       expect(age).to.equal(newUser.age);
-       expect(height).to.equal(newUser.height);
-       expect(name).to.equal(newUser.name);
-       done();
-      });  
+  it("preDatabaseInserted user properties equals postDatabaseInserted user properties", async () => {
+    const { body: { name, height, age }} = await mockPostRequest({ userName, userHeight, userAge });
+    expect(userName).to.be.equal(name);
+    expect(userHeight).to.be.equal(height);
+    expect(userAge).to.be.equal(age);
   });
   
   let falseNewUser, falseUserName, falseUserAge, falseUserHeight;
@@ -79,37 +63,18 @@ describe("when inserting a new newUser", () => {
 
   describe("a user is created with the wrong data type", () => {
     
-    it("400 status code should be received", (done) => {
-      chai.request(server)
-      .post('/api/')
-      .send({
-        'name': falseUserName,
-        'height': falseUserHeight,
-        'age': falseUserAge
-      })
-      .end((_, res) => {
-         expect(res).to.have.status(400);
-         done();
-        });  
+    it("400 status code should be received", async () => {
+      const { res: { statusCode }} = await mockPostRequest({ falseUserName, falseUserHeight, falseUserAge });
+      expect(statusCode).to.be.equal(400);
     });
     
-    it("'You have entered the wrong data type' should be received", (done) => {
-      chai.request(server)
-      .post('/api/')
-      .send({
-        'name': falseUserName,
-        'height': falseUserHeight,
-        'age': falseUserAge
-      })
-      .end((_, res) => {
-        expect(res.error.text).to.be.equal("You have entered the wrong data type");
-        done();
-      });  
+    it("'You have entered the wrong data type' should be received", async () => {
+      const { res } = await mockPostRequest({ falseUserName, falseUserHeight, falseUserAge });
+      expect(res.text).to.be.equal("You have entered the wrong data type");  
     });
+
   });
-
 });
-
 // CRUD - CREATE, READ
 // TODO READ
 // when creating a new user
