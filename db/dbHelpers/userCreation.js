@@ -21,7 +21,6 @@ const userPropertyValidation = (name, age, height) => {
 const dbInsertQuery = async ({ age, height, name }) => {
   const dbQuery = await db.query(`INSERT INTO users (age, height, username) VALUES ('${age}','${height}', '${name}') RETURNING id`);
   const newUser = { id: dbQuery.rows[0].id, age, height, name };
-  console.log(newUser, 'newUser in userCreation file')
   return newUser;
 };
 

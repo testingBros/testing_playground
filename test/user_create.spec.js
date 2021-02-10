@@ -4,11 +4,11 @@ const expect = require("chai").expect;
 const { random, name } = require("faker");
 
 let newUser, userName, userAge, userHeight;
-beforeEach(() => {
+beforeEach( async () => {
   userName = name.firstName();
   userAge = random.number();
   userHeight = `${random.number()}ft`;
-  newUser = userCreation(userName, userAge, userHeight);
+  newUser = await userCreation(userName, userAge, userHeight);
 });
 
 describe("creating a new newUser", () => {
@@ -20,7 +20,7 @@ describe("creating a new newUser", () => {
   });
 
   context("with arguments", () => {
-    console.log(userCreation);
+
     it("newUser's age should be an integer", () => {
       expect(typeof newUser.age).to.equal("number");
     });
