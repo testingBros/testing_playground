@@ -9,7 +9,7 @@ apiRouter.post("/", async (req, res) => {
     if (!newUser) throw "You have entered the wrong data type";
     res.status(201).send(newUser);
   } catch(err) {
-      if (err) res.status(400).send("You have entered the wrong data type");
+      if (err) res.status(400).send(err);
   }
 });
 
