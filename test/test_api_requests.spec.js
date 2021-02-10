@@ -1,5 +1,4 @@
-const expect = require("chai").expect,
-{ random, name } = require("faker"),
+const { random, name } = require("faker"),
 { userCreation } = require("../userCreation.js"),
 chai = require('chai'),
 chaiHttp = require('chai-http'),
