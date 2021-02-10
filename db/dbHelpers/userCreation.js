@@ -1,4 +1,4 @@
-const { db } = require('./db/index');
+const { db } = require('../index');
 const userCreation = (name, age, height) => {
   if (userPropertyValidation(name, age, height) === false) {
     return false;
@@ -18,12 +18,14 @@ const userPropertyValidation = (name, age, height) => {
 
 };
 
-const dbInsertQuery = ({ age, height, name }) => {
-  const newUser = {age, height, name };
-  db.query(`INSERT INTO users (age, height, username) VALUES ('${age}','${height}', '${name}')`);
+const dbInsertQuery = async ({ age, height, name }) => {
+  const dbQuery = await db.query(`INSERT INTO users (age, height, username) VALUES ('${age}','${height}', '${name}') RETURNING id`);
+  const newUser = { id: dbQuery.rows[0].id, age, height, name };
+  console.log(newUser, 'newUser in userCreation file')
   return newUser;
 };
 
-Object.assign(module.exports, {
+
+module.exports = {
   userCreation,
-});
+}
