@@ -1,3 +1,5 @@
+const { mockPostRequest } = require("./test_api_requests.spec.js");
+
 const expect = require("chai").expect,
 { random, name } = require("faker"),
 { userCreation } = require("../userCreation.js"),
@@ -45,18 +47,9 @@ describe("creating a new newUser", () => {
 
 describe("when inserting a new newUser", () => {
   
-  it("201 status code should be received", () => {
-     chai.request(server)
-    .post('/api/')
-     .send({
-       'name': userName,
-       'height': userHeight,
-       'age': userAge
-     })
-     .end((err, res) => {
-        expect(err).to.be.null;
-        expect(res).to.have.status(201);
-     });
+  it("201 status code should be received", async () => {
+    const { res: { statusCode } } = await mockPostRequest({ userName, userHeight, userAge })
+    expect(statusCode).to.equal(201);
   });
 
   it("preDatabaseInserted user properties equals postDatabaseInserted user properties", (done) => {
@@ -121,3 +114,4 @@ describe("when inserting a new newUser", () => {
 // TODO READ
 // when creating a new user
   // then the same user should be accessible (GET)
+// look into making requests modular
