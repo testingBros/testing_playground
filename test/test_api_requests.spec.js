@@ -1,5 +1,5 @@
 const { random, name } = require("faker"),
-{ userCreation } = require("../userCreation.js"),
+{ userCreation } = require("../db/dbHelpers/userCreation.js"),
 chai = require('chai'),
 chaiHttp = require('chai-http'),
 server = 'http://localhost:3000';

@@ -1,7 +1,7 @@
-const { mockPostRequest } = require("./test_api_requests.spec.js"),
-expect = require("chai").expect,
-{ random, name } = require("faker"),
-{ userCreation } = require("../userCreation.js");
+const { mockPostRequest } = require("./test_api_requests.spec.js");
+const { userCreation } = require("../db/dbHelpers/utils");
+const expect = require("chai").expect;
+const { random, name } = require("faker");
 
 let newUser, userName, userAge, userHeight;
 beforeEach(() => {
@@ -20,7 +20,7 @@ describe("creating a new newUser", () => {
   });
 
   context("with arguments", () => {
-
+    console.log(userCreation);
     it("newUser's age should be an integer", () => {
       expect(typeof newUser.age).to.equal("number");
     });
@@ -75,6 +75,8 @@ describe("when inserting a new newUser", () => {
 
   });
 });
+
+
 // CRUD - CREATE, READ
 // TODO READ
 // when creating a new user
