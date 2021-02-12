@@ -1,30 +1,30 @@
-const { db } = require('../index');
-const userCreation = (name, age, height) => {
-  if (userPropertyValidation(name, age, height) === false) {
+const { db } = require("../index");
+const userCreation = (username, age, height) => {
+  if (userPropertyValidation(username, age, height) === false) {
     return false;
   }
 
-  return dbInsertQuery({ name, age, height });
+  return dbInsertQuery({ username, age, height });
 };
 
-const userPropertyValidation = (name, age, height) => {
-  if (!name || !age || !height) {
+const userPropertyValidation = (username, age, height) => {
+  if (!username || !age || !height) {
     return false;
   }
   // ask someone about best practices about this
-    // Is this function doing too much or should it be extrapolated out
-  if (typeof name !== 'string') return false;
-  if (typeof height !== 'string') return false;
-
+  // Is this function doing too much or should it be extrapolated out
+  if (typeof username !== "string") return false;
+  if (typeof height !== "string") return false;
 };
 
-const dbInsertQuery = async ({ age, height, name }) => {
-  const dbQuery = await db.query(`INSERT INTO users (age, height, username) VALUES ('${age}','${height}', '${name}') RETURNING id`);
-  const newUser = { id: dbQuery.rows[0].id, age, height, name };
+const dbInsertQuery = async ({ age, height, username }) => {
+  const dbQuery = await db.query(
+    `INSERT INTO users (age, height, username) VALUES ('${age}','${height}', '${username}') RETURNING id`
+  );
+  const newUser = { id: dbQuery.rows[0].id, age, height, username };
   return newUser;
 };
 
-
 module.exports = {
   userCreation,
-}
+};

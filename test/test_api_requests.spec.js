@@ -1,14 +1,12 @@
-const { random, name } = require("faker"),
-  { userCreation } = require("../db/dbHelpers/userCreation.js"),
-  chai = require("chai"),
+const chai = require("chai"),
   chaiHttp = require("chai-http"),
   server = "http://localhost:3000";
 
 chai.use(chaiHttp);
 
-const mockPostRequest = async ({ userName, userHeight, userAge }) => {
+const mockPostRequest = async ({ userName, userHeight, userAge } = {}) => {
   return await chai.request(server).post("/api/").send({
-    name: userName,
+    username: userName,
     height: userHeight,
     age: userAge,
   });
@@ -17,7 +15,11 @@ const mockPostRequest = async ({ userName, userHeight, userAge }) => {
 const mockGetRequest = async (currentUserId) =>
   await chai.request(server).get(`/api/${currentUserId}`);
 
+const mockPatchRequest = async (id, propertyToUpdate) =>
+  await chai.request(server).patch(`/api/${id}`).send(propertyToUpdate);
+
 module.exports = {
   mockPostRequest,
   mockGetRequest,
+  mockPatchRequest,
 };
