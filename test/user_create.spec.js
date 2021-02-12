@@ -2,18 +2,17 @@ const { mockPostRequest } = require("./test_api_requests.spec.js");
 const expect = require("chai").expect;
 const { random, name } = require("faker");
 
-let newUser, userName, userAge, userHeight, mockHttpResponse;
-
-before(async () => {
-  userName = name.firstName();
-  userAge = random.number();
-  userHeight = `${random.number()}ft`;
-  newUser = await mockPostRequest({ userName, userHeight, userAge });
-  mockHttpResponse = newUser.res;
-  newUser = newUser.body;
-});
-
 describe("creating a new user", () => {
+  let newUser, userName, userAge, userHeight, mockHttpResponse;
+
+  before(async () => {
+    userName = name.firstName();
+    userAge = random.number();
+    userHeight = `${random.number()}ft`;
+    newUser = await mockPostRequest({ userName, userHeight, userAge });
+    mockHttpResponse = newUser.res;
+    newUser = newUser.body;
+  });
   context("without arguments", () => {
     it("should log please include name, age, height", async () => {
       const {

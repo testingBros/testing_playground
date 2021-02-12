@@ -1,3 +1,5 @@
+// finish tests for user_read_spec.js (include things such as error handling, headers, cookies, ...)
+// discuss best practices for handling ids server/client-side
 const expect = require("chai").expect,
   { mockPostRequest, mockGetRequest } = require("./test_api_requests.spec.js"),
   { random, name } = require("faker");
@@ -45,6 +47,3 @@ describe("when retrieving a user", () => {
     });
   });
 });
-
-// finish tests for user_read_spec.js (include things such as error handling, headers, cookies, ...)
-// discuss best practices for handling ids server/client-side
