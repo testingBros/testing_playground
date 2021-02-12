@@ -20,4 +20,7 @@ describe("when retrieving a user", () => {
 
 // when creating a new user
   // then the same user should be accessible (GET)
+// finish making user retrieval function inside of userRetrieval.js
+// finish tests for user_read_spec.js (include things such as error handling, headers, cookies, ...)
+// discuss best practices for handling ids server/client-side
 
