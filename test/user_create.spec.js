@@ -13,7 +13,7 @@ before(async () => {
   newUser = newUser.body;
 });
 
-describe("creating a new newUser", () => {
+describe("creating a new user", () => {
   context("without arguments", () => {
     it("should log please include name, age, height", async () => {
       const {
@@ -24,34 +24,33 @@ describe("creating a new newUser", () => {
   });
 
   context("with arguments", () => {
-    it("newUser's age should be an integer", () => {
+    it("new user's age should be an integer", () => {
       expect(typeof newUser.age).to.equal("number");
     });
 
-    it("newUser's name should be a string", () => {
-      expect(typeof newUser.name).to.equal("string");
+    it("new user's name should be a string", () => {
+      expect(typeof newUser.username).to.equal("string");
     });
 
-    it("newUser's height should be a string", () => {
+    it("new user's height should be a string", () => {
       expect(typeof newUser.height).to.equal("string");
     });
 
-    it("newUser should be an object", () => {
+    it("new user should be an object", () => {
       expect(typeof newUser).to.equal("object");
     });
   });
-});
 
-describe("when inserting a new newUser", () => {
-  it("201 status code should be received", () =>
-    expect(mockHttpResponse.statusCode).to.equal(201));
-
-  it("preDatabaseInserted user properties equals postDatabaseInserted user properties", () => {
-    expect(userName).to.be.equal(newUser.name);
-    expect(userHeight).to.be.equal(newUser.height);
-    expect(userAge).to.be.equal(newUser.age);
+  context("when inserting the new user", () => {
+    it("201 status code should be received", () =>
+      expect(mockHttpResponse.statusCode).to.equal(201));
+    // come back and look at the test name, something is weird about it.
+    it("preDatabaseInserted user properties equals postDatabaseInserted user properties", () => {
+      expect(userName).to.be.equal(newUser.username);
+      expect(userHeight).to.be.equal(newUser.height);
+      expect(userAge).to.be.equal(newUser.age);
+    });
   });
-
   let falseNewUser,
     falseUserName,
     falseUserAge,
@@ -70,7 +69,7 @@ describe("when inserting a new newUser", () => {
     falseMockHttpResponse = falseNewUser.res;
   });
 
-  describe("a user is created with the wrong data type", () => {
+  context("when a new user is created with the wrong data type", () => {
     it("400 status code should be received", () =>
       expect(falseMockHttpResponse.statusCode).to.be.equal(400));
 
