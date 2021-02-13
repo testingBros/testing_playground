@@ -18,10 +18,12 @@ const userPropertyValidation = (username, age, height) => {
 };
 
 const dbInsertQuery = async ({ age, height, username }) => {
-  const dbQuery = await db.query(
+  const {
+    rows: [{ id }],
+  } = await db.query(
     `INSERT INTO users (age, height, username) VALUES ('${age}','${height}', '${username}') RETURNING id`
   );
-  const newUser = { id: dbQuery.rows[0].id, age, height, username };
+  const newUser = { id, age, height, username };
   return newUser;
 };
 
