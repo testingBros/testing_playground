@@ -1,3 +1,8 @@
+// add testing for updating various numbers of properties.
+// error handling for unsuccessful patch requests.
+// maybe try put requests? maybe who knows?
+// make delete route
+
 const expect = require("chai").expect,
   { random, name } = require("faker"),
   { mockPostRequest, mockPatchRequest } = require("./test_api_requests.spec");
