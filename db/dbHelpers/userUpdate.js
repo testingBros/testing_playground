@@ -8,13 +8,15 @@ const queryBuilder = (userPropertyValuesToUpdate) =>
 
 const userUpdate = async (id, userPropertyValuesToUpdate) => {
   const userId = +id;
-  const user = await db.query(
+  const {
+    rows: [user],
+  } = await db.query(
     `UPDATE users SET ${queryBuilder(userPropertyValuesToUpdate).slice(
       0,
       -2
     )} WHERE id = ${userId} returning *`
   );
-  return user.rows[0];
+  return user;
 };
 
 module.exports = {
