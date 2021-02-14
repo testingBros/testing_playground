@@ -8,8 +8,6 @@ Use npm package manager to install dependencies
 - npm install
 ```
 
-Installing here will also install dependencies in the server
-
 # Run Scripts
 
 It is recommended that you use the following `npm run` scripts to interact with the application
