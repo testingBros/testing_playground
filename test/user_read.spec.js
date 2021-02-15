@@ -22,7 +22,7 @@ describe("when retrieving a user", () => {
     expect(mockGetHttpResponse.statusCode).to.be.equal(200);
   });
 
-  it("the retrieved values should equal posted values", () => {
+  it("should validate that the user's property values have not changed", () => {
     expect(currentUser.username).to.be.equal(newUser.username);
     expect(currentUser.age).to.be.equal(newUser.age);
     expect(currentUser.height).to.be.equal(newUser.height);

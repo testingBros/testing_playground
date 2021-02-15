@@ -9,6 +9,7 @@ describe("creating a new user", () => {
     userName = name.firstName();
     userAge = random.number();
     userHeight = `${random.number()}ft`;
+    
     newUser = await mockPostRequest({ userName, userHeight, userAge });
     mockHttpResponse = newUser.res;
     newUser = newUser.body;
@@ -43,12 +44,13 @@ describe("creating a new user", () => {
   context("when inserting the new user", () => {
     it("201 status code should be received", () =>
       expect(mockHttpResponse.statusCode).to.equal(201));
-    // come back and look at the test name, something is weird about it.
-    it("preDatabaseInserted user properties equals postDatabaseInserted user properties", () => {
+
+    it("should validate that the new user's property values have not changed", () => {
       expect(userName).to.be.equal(newUser.username);
       expect(userHeight).to.be.equal(newUser.height);
       expect(userAge).to.be.equal(newUser.age);
     });
+
   });
   let falseNewUser,
     falseUserName,
@@ -60,6 +62,7 @@ describe("creating a new user", () => {
     falseUserName = random.number();
     falseUserAge = name.firstName();
     falseUserHeight = random.number();
+
     falseNewUser = await mockPostRequest(
       falseUserName,
       falseUserAge,
