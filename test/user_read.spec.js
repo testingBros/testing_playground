@@ -37,11 +37,11 @@ describe("when retrieving a user", () => {
 
   context("that is not in the database", () => {
     it("should receive a 404 status code", () => {
-      expect(falseMockGetHttpResponse.statusCode).to.be.equal(404);
+      expect(falseMockGetHttpResponse.error.status).to.be.equal(404);
     });
 
-    it('should receive the error message "This user does not exist."', () => {
-      expect(falseMockGetHttpResponse.text).to.be.equal(
+    it("should receive the error message 'This user does not exist.'", () => {
+      expect(falseMockGetHttpResponse.error.text).to.be.equal(
         "This user does not exist."
       );
     });

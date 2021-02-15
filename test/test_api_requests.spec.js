@@ -15,8 +15,8 @@ const mockPostRequest = async ({ userName, userHeight, userAge } = {}) => {
 const mockGetRequest = async (currentUserId) =>
   await chai.request(server).get(`/api/${currentUserId}`);
 
-const mockPatchRequest = async (id, propertyToUpdate) =>
-  await chai.request(server).patch(`/api/${id}`).send(propertyToUpdate);
+const mockPatchRequest = async (id, propertiesObject) =>
+  await chai.request(server).patch(`/api/${id}`).send(propertiesObject);
 
 module.exports = {
   mockPostRequest,
