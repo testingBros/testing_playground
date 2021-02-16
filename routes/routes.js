@@ -2,6 +2,7 @@ const {
     userCreation,
     userRetrieval,
     userUpdate,
+    userDelete,
   } = require("../db/dbHelpers/utils"),
   { errorHandlerBuilder, errorMessageBuilder } = require("./utils"),
   express = require("express"),
@@ -46,7 +47,9 @@ apiRouter.patch("/:id", async (req, res) => {
 apiRouter.delete("/:id", async (req, res) => {
   const { params: { id }} = req;
   try {
-    
+    const deletedUserResponse = await userDelete(id);
+    errorMessageBuilder("This user does not exist.", deletedUserResponse);
+    res.sendStatus(204);    
   } catch (err) {
     errorHandlerBuilder(404, err, res);
   }

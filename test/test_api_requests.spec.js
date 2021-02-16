@@ -4,11 +4,9 @@ const chai = require("chai"),
 
 chai.use(chaiHttp);
 
-const mockPostRequest = async ({ userName, userHeight, userAge } = {}) => {
+const mockPostRequest = async ({ username, height, age } = {}) => {
   return await chai.request(server).post("/api/").send({
-    username: userName,
-    height: userHeight,
-    age: userAge,
+    username, height, age
   });
 };
 
@@ -18,8 +16,12 @@ const mockGetRequest = async (currentUserId) =>
 const mockPatchRequest = async (id, propertiesObject) =>
   await chai.request(server).patch(`/api/${id}`).send(propertiesObject);
 
+const mockDeleteRequest = async (id) =>
+  await chai.request(server).delete(`/api/${id}`);  
+
 module.exports = {
   mockPostRequest,
   mockGetRequest,
   mockPatchRequest,
+  mockDeleteRequest,
 };
