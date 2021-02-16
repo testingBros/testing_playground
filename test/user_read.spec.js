@@ -17,18 +17,18 @@ describe("when retrieving a user", () => {
     mockGetHttpResponse = await mockGetRequest(newUser.id);
     currentUser = mockGetHttpResponse.body;
   });
+  context("that is in the database", () => {
+    it("a 200 status code should be retrieved", () => {
+      expect(mockGetHttpResponse.statusCode).to.be.equal(200);
+    });
 
-  it("a 200 status code should be retrieved", () => {
-    expect(mockGetHttpResponse.statusCode).to.be.equal(200);
-  });
-
-  it("should validate that the user's property values have not changed", () => {
-    expect(currentUser.username).to.be.equal(newUser.username);
-    expect(currentUser.age).to.be.equal(newUser.age);
-    expect(currentUser.height).to.be.equal(newUser.height);
-    expect(currentUser.id).to.be.equal(newUser.id);
-  });
-
+    it("should validate that the user's property values have not changed", () => {
+      expect(currentUser.username).to.be.equal(newUser.username);
+      expect(currentUser.age).to.be.equal(newUser.age);
+      expect(currentUser.height).to.be.equal(newUser.height);
+      expect(currentUser.id).to.be.equal(newUser.id);
+    });
+});
   let falseMockGetHttpResponse;
 
   before(async () => {

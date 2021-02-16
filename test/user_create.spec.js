@@ -2,7 +2,7 @@ const { mockPostRequest } = require("./test_api_requests.spec.js");
 const expect = require("chai").expect;
 const { random, name } = require("faker");
 
-describe("creating a new user", () => {
+describe("when creating a new user", () => {
   let newUser, userName, userAge, userHeight, mockHttpResponse;
 
   before(async () => {

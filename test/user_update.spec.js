@@ -2,7 +2,7 @@ const expect = require("chai").expect,
   { random, name } = require("faker"),
   { mockPostRequest, mockPatchRequest } = require("./test_api_requests.spec");
 
-describe("When updating a user in the database", () => {
+describe("when updating a user in the database", () => {
   let newUser, userName, userAge, userHeight;
   before(async () => {
     userName = name.firstName();
@@ -13,11 +13,13 @@ describe("When updating a user in the database", () => {
   });
 
   context("when updating a user's name", () => {
-    it("should validate that the user's name has been updated", async () => {
+    it("should validate that only the user's name has been updated", async () => {
       const {
-        body: { username: updatedUserName },
+        body: { username: updatedUserName, age, height },
       } = await mockPatchRequest(newUser.id, { username: name.firstName() });
       expect(updatedUserName).to.not.be.equal(newUser.username);
+      expect(age).to.be.equal(newUser.age);
+      expect(height).to.be.equal(newUser.height);
     });
   });
 
@@ -38,7 +40,7 @@ before(async () => {
   falseMockPatchRequest = await mockPatchRequest(0, { username: "mike" });
 });
 
-describe("When trying to update a user that is not in the database", () => {
+describe("when trying to update a user that is not in the database", () => {
   it("a status code of 404 should be received", () => {
     expect(falseMockPatchRequest.error.status).to.equal(404);
   });
