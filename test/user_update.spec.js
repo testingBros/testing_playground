@@ -3,12 +3,12 @@ const expect = require("chai").expect,
   { mockPostRequest, mockPatchRequest } = require("./test_api_requests.spec");
 
 describe("when updating a user in the database", () => {
-  let newUser, userName, userAge, userHeight;
+  let newUser, username, age, height;
   before(async () => {
-    userName = name.firstName();
-    userAge = random.number();
-    userHeight = `${random.number()}ft`;
-    newUser = await mockPostRequest({ userHeight, userAge, userName });
+    username = name.firstName();
+    age = random.number();
+    height = `${random.number()}ft`;
+    newUser = await mockPostRequest({ height, age, username });
     newUser = newUser.body;
   });
 

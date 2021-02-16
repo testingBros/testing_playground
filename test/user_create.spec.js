@@ -3,14 +3,14 @@ const expect = require("chai").expect;
 const { random, name } = require("faker");
 
 describe("when creating a new user", () => {
-  let newUser, userName, userAge, userHeight, mockHttpResponse;
+  let newUser, username, age, height, mockHttpResponse;
 
   before(async () => {
-    userName = name.firstName();
-    userAge = random.number();
-    userHeight = `${random.number()}ft`;
+    username = name.firstName();
+    age = random.number();
+    height = `${random.number()}ft`;
     
-    newUser = await mockPostRequest({ userName, userHeight, userAge });
+    newUser = await mockPostRequest({ username, height, age });
     mockHttpResponse = newUser.res;
     newUser = newUser.body;
   });
@@ -46,9 +46,9 @@ describe("when creating a new user", () => {
       expect(mockHttpResponse.statusCode).to.equal(201));
 
     it("should validate that the new user's property values have not changed", () => {
-      expect(userName).to.be.equal(newUser.username);
-      expect(userHeight).to.be.equal(newUser.height);
-      expect(userAge).to.be.equal(newUser.age);
+      expect(username).to.be.equal(newUser.username);
+      expect(height).to.be.equal(newUser.height);
+      expect(age).to.be.equal(newUser.age);
     });
 
   });

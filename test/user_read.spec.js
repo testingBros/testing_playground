@@ -6,13 +6,13 @@ const expect = require("chai").expect,
 
 const userId = random.number() * 1000;
 describe("when retrieving a user", () => {
-  let newUser, userName, userAge, userHeight, mockGetHttpResponse;
+  let newUser, username, age, height, mockGetHttpResponse;
 
   before(async () => {
-    userName = name.firstName();
-    userAge = random.number();
-    userHeight = `${random.number()}ft`;
-    newUser = await mockPostRequest({ userName, userHeight, userAge });
+    username = name.firstName();
+    age = random.number();
+    height = `${random.number()}ft`;
+    newUser = await mockPostRequest({ username, height, age });
     newUser = newUser.body;
     mockGetHttpResponse = await mockGetRequest(newUser.id);
     currentUser = mockGetHttpResponse.body;
