@@ -2,14 +2,15 @@ const { mockPostRequest } = require("./test_api_requests.spec.js");
 const expect = require("chai").expect;
 const { random, name } = require("faker");
 
-describe("creating a new user", () => {
-  let newUser, userName, userAge, userHeight, mockHttpResponse;
+describe("when creating a new user", () => {
+  let newUser, username, age, height, mockHttpResponse;
 
   before(async () => {
-    userName = name.firstName();
-    userAge = random.number();
-    userHeight = `${random.number()}ft`;
-    newUser = await mockPostRequest({ userName, userHeight, userAge });
+    username = name.firstName();
+    age = random.number();
+    height = `${random.number()}ft`;
+    
+    newUser = await mockPostRequest({ username, height, age });
     mockHttpResponse = newUser.res;
     newUser = newUser.body;
   });
@@ -43,12 +44,13 @@ describe("creating a new user", () => {
   context("when inserting the new user", () => {
     it("201 status code should be received", () =>
       expect(mockHttpResponse.statusCode).to.equal(201));
-    // come back and look at the test name, something is weird about it.
-    it("preDatabaseInserted user properties equals postDatabaseInserted user properties", () => {
-      expect(userName).to.be.equal(newUser.username);
-      expect(userHeight).to.be.equal(newUser.height);
-      expect(userAge).to.be.equal(newUser.age);
+
+    it("should validate that the new user's property values have not changed", () => {
+      expect(username).to.be.equal(newUser.username);
+      expect(height).to.be.equal(newUser.height);
+      expect(age).to.be.equal(newUser.age);
     });
+
   });
   let falseNewUser,
     falseUserName,
@@ -60,6 +62,7 @@ describe("creating a new user", () => {
     falseUserName = random.number();
     falseUserAge = name.firstName();
     falseUserHeight = random.number();
+
     falseNewUser = await mockPostRequest(
       falseUserName,
       falseUserAge,
