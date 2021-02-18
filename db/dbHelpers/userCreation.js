@@ -23,8 +23,7 @@ const dbInsertQuery = async ({ age, height, username }) => {
   } = await db.query(
     `INSERT INTO users (age, height, username) VALUES ('${age}','${height}', '${username}') RETURNING id`
   );
-  const newUser = { id, age, height, username };
-  return newUser;
+  return { id, age, height, username };
 };
 
 module.exports = {
