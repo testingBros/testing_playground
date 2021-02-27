@@ -1,6 +1,9 @@
-const expect = require("chai").expect,
-  { random, name } = require("faker"),
-  { mockPostRequest, mockPatchRequest } = require("./test_api_requests.spec");
+const expect = require("chai").expect;
+const { random, name } = require("faker");
+const {
+  mockPostRequest,
+  mockPatchRequest,
+} = require("./test_api_requests.spec");
 
 describe("when updating a user in the database", () => {
   let newUser, username, age, height;
@@ -26,8 +29,11 @@ describe("when updating a user in the database", () => {
   context("when updating a user's age and height", () => {
     it("should validate that the user's age and height have been updated", async () => {
       const {
-        body: { age: updatedAge, height: updatedHeight }
-      } = await mockPatchRequest(newUser.id, { height: `${random.number()}ft`, age: random.number() });
+        body: { age: updatedAge, height: updatedHeight },
+      } = await mockPatchRequest(newUser.id, {
+        height: `${random.number()}ft`,
+        age: random.number(),
+      });
       expect(updatedHeight).to.not.be.equal(newUser.height);
       expect(updatedAge).to.not.be.equal(newUser.age);
     });
@@ -46,6 +52,8 @@ describe("when trying to update a user that is not in the database", () => {
   });
 
   it("an error message of 'This user does not exist.' should be received", () => {
-    expect(falseMockPatchRequest.error.text).to.equal("This user does not exist.")
+    expect(falseMockPatchRequest.error.text).to.equal(
+      "This user does not exist."
+    );
   });
 });

@@ -1,8 +1,11 @@
 // finish tests for user_read_spec.js (include things such as error handling, headers, cookies, ...)
 // discuss best practices for handling ids server/client-side
-const expect = require("chai").expect,
-  { mockPostRequest, mockGetRequest } = require("./test_api_requests.spec.js"),
-  { random, name } = require("faker");
+const expect = require("chai").expect;
+const {
+  mockPostRequest,
+  mockGetRequest,
+} = require("./test_api_requests.spec.js");
+const { random, name } = require("faker");
 
 const userId = random.number() * 1000;
 describe("when retrieving a user", () => {
@@ -28,7 +31,7 @@ describe("when retrieving a user", () => {
       expect(currentUser.height).to.be.equal(newUser.height);
       expect(currentUser.id).to.be.equal(newUser.id);
     });
-});
+  });
   let falseMockGetHttpResponse;
 
   before(async () => {
