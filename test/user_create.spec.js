@@ -9,7 +9,7 @@ describe("when creating a new user", () => {
     username = name.firstName();
     age = random.number();
     height = `${random.number()}ft`;
-    
+
     newUser = await mockPostRequest({ username, height, age });
     mockHttpResponse = newUser.res;
     newUser = newUser.body;
@@ -50,7 +50,6 @@ describe("when creating a new user", () => {
       expect(height).to.be.equal(newUser.height);
       expect(age).to.be.equal(newUser.age);
     });
-
   });
   let falseNewUser,
     falseUserName,
